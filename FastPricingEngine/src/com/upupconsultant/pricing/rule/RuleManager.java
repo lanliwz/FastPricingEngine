@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.io.BufferedOutputStream;
 
+import com.upupconsultant.common.data.Dao;
 import com.upupconsultant.pricing.model.*;
 
 import org.drools.KnowledgeBase;
@@ -19,14 +20,32 @@ public class RuleManager {
 	private String ruleFileRoot;
 	private String ruleFileBackupRoot;
 	private String ruleTemplateRoot;
+	private Dao dao;
 	
-	private List<GroupValue> attrGroups = new ArrayList<GroupValue>(); 
+	private List<?> attrGroups = new ArrayList(); 
 	
 	public String getDrl(int providerId){
-		List<PricingRule> crules=null; 
-		if (crules==null||crules.size()==0)
+		List<PricingRule> crules=dao.findPricingRule(providerId); 
+		if (crules==null||crules.size()==0){
+			logger.info("No rule defined for provider {}",providerId);
 			return null;
-		return null;
+		}
+		List<SplitRule> rules = new ArrayList<SplitRule>();
+		for (PricingRule prule:crules){
+			logger.info("construction rule id = {}",prule.getId());
+			List<PricingRuleCondition> conds = dao.findPricingRuleCondition(prule.getId());
+			List<SplitRuleItem> items = new ArrayList<SplitRuleItem>();
+			SplitRule srule = new SplitRule(prule.getId());
+			srule.setActivationGroup(prule.getActivationGroup());
+			srule.setAgendaGroup(prule.getAgendaGroup());
+			srule.setProviderId(prule.getProviderId());
+			srule.setSalience(prule.getSalience());
+			srule.setRuleName(prule.getName());
+			
+			
+		}
+		return "";
+		
 		
 	}
 	
@@ -81,13 +100,7 @@ public class RuleManager {
 		this.ruleTemplateRoot = ruleTemplateRoot;
 	}
 
-	public List<GroupValue> getAttrGroups() {
-		return attrGroups;
-	}
 
-	public void setAttrGroups(List<GroupValue> attrGroups) {
-		this.attrGroups = attrGroups;
-	}
 
 	public String getPackage_base_name() {
 		return package_base_name;
