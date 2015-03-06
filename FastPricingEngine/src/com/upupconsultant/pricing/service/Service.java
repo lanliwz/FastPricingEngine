@@ -1,5 +1,7 @@
 package com.upupconsultant.pricing.service;
 
+import com.upupconsultant.common.data.PricingEntity;
+
 public interface Service {
 	public void log(String msg);
 	public void error(PricingEntity entity,String pricingRule);

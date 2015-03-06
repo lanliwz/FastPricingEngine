@@ -14,9 +14,9 @@ import org.drools.conf.EventProcessingOption;
 import org.drools.conf.MBeansOption;
 import org.drools.runtime.StatefulKnowledgeSession;
 
+import com.upupconsultant.common.data.PricingEntity;
 import com.upupconsultant.pricing.model.GroupValue;
 import com.upupconsultant.pricing.rule.RuleManager;
-import com.upupconsultant.pricing.service.PricingEntity;
 import com.upupconsultant.pricing.service.PricingService;
 import com.upupconsultant.pricing.event.PricingEvent;
 public class CEProcessor{

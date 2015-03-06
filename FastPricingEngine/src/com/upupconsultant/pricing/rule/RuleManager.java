@@ -40,7 +40,7 @@ public class RuleManager {
 	private String ruleTemplateRoot;
 	private Dao dao;
 	
-	private List<?> attrGroups = new ArrayList(); 
+	private List<ProviderGroup> providerGroups = new ArrayList(); 
 	
 	public String getDrl(long providerId){
 		List<PricingRule> crules=dao.findPricingRule(providerId); 

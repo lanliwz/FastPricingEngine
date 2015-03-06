@@ -2,6 +2,8 @@ package com.upupconsultant.pricing.service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import com.upupconsultant.common.data.PricingEntity;
+
 public class PricingService implements Service {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
