@@ -1,21 +1,17 @@
 package com.upupconsultant.pricing.model;
 
 public class BasicSplitInstruction implements SplitInstruction {
-	private double percentage;
+	private double value;
 	
-	public BasicSplitInstruction(double percentage){
-		this.percentage=percentage;
+	public BasicSplitInstruction(double value){
+		this.value=value;
 	}
 
 	@Override
-	public double getPercentage() {
-		// TODO Auto-generated method stub
-		return 0;
+	public double getValue() {
+		return value;
 	}
 
-	public void setPercentage(double percentage) {
-		this.percentage = percentage;
-	}
-	
+
 
 }

@@ -1,6 +1,6 @@
 package com.upupconsultant.pricing.model;
 
 public interface SplitInstruction {
-	public double getPercentage();
+	public double getValue();
 
 }
