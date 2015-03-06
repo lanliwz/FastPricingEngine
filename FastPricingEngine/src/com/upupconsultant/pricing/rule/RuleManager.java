@@ -180,7 +180,7 @@ public class RuleManager {
 			
 			
 		}else
-			logger.info("No binary knowledge file {} exists, the rule manager will rebuild it and it will take minutes to complete ...",filename);
+			logger.info("No binary knowledge file exists, the rule manager will rebuild it and it will take minutes to complete ...",filename);
 		
 		this.knowledgebase=kbase;
 		return kbase;
@@ -231,9 +231,18 @@ public class RuleManager {
 	}
 			
 	public void loadPricingGroup(){
+		List<ProviderGroup> pgrps = dao.findProviderGroup();
+		for(ProviderGroup gp:pgrps){
+			
+			List<String> providers = dao.findGroupMembers(gp.getGroupName());
+			gp.setProviderIds(providers);
+			pgrps.add(gp);
+			
+		}
+		this.providerGroups=pgrps;
 		
 	}
-	public List<GroupValue> getGroupValues(){
+	public List<GroupMember> getGroupValues(){
 		return null;
 	}
 
@@ -282,5 +291,12 @@ public class RuleManager {
 	public String getPackage_base_name() {
 		return package_base_name;
 	}
+	public Dao getDao() {
+		return dao;
+	}
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+	
 
 }

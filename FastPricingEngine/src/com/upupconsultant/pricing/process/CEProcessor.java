@@ -14,7 +14,7 @@ import org.drools.conf.EventProcessingOption;
 import org.drools.conf.MBeansOption;
 import org.drools.runtime.StatefulKnowledgeSession;
 
-import com.upupconsultant.pricing.model.GroupValue;
+import com.upupconsultant.pricing.model.GroupMember;
 import com.upupconsultant.pricing.model.PricingEntity;
 import com.upupconsultant.pricing.rule.RuleManager;
 import com.upupconsultant.pricing.service.PricingService;
@@ -88,9 +88,9 @@ public class CEProcessor{
 		try {
 			this.session = createSession();
 			ruleManager.loadPricingGroup();
-			List<GroupValue> attributeGroup1 = ruleManager.getGroupValues();
+			List<GroupMember> attributeGroup1 = ruleManager.getGroupValues();
 			if (attributeGroup1 != null)
-			for(GroupValue gv:attributeGroup1){
+			for(GroupMember gv:attributeGroup1){
 				this.session.insert(gv);
 			}
 			this.claimstream = this.session.getWorkingMemoryEntryPoint("claim stream");
