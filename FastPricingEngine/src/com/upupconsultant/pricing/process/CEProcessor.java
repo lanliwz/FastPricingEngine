@@ -119,7 +119,7 @@ public class CEProcessor{
 		conf.setOption(EventProcessingOption.STREAM);
 		conf.setOption(MBeansOption.ENABLED);
 		
-		return null; //ruleManager.buildKnowledgeBase(conf);
+		return ruleManager.buildKnowledgeBase(conf);
 	}
 	public StatefulKnowledgeSession createSession(KnowledgeBase kbase){
 		StatefulKnowledgeSession session = kbase.newStatefulKnowledgeSession();

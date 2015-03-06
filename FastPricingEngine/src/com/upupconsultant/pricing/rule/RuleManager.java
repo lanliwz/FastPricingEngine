@@ -158,7 +158,7 @@ public class RuleManager {
 	public synchronized KnowledgeBase loadKnowledgeBase(){
 		KnowledgeBase kbase=null;
 		File ruleDir = new File(ruleFileRoot);
-		String[] ruleFiles = ruleDir.list(new PrefixFileFilter(RULE_FILE_BASENAME));
+		String[] ruleFiles = ruleDir.list(new PrefixFileFilter(RULE_FILE_KNOWLEDGEBASE));
 		String filename=null;
 		if (ruleFiles!=null && ruleFiles.length>0){
 			filename = FilenameUtils.concat(ruleFileRoot, ruleFiles[0]);
@@ -213,15 +213,16 @@ public class RuleManager {
 				// TODO Auto-generated catch block
 				logger.error("Fail to backup file",e);
 			}
-			if (drl!=null && !drl.trim().equals("")){
-				String rulefile = FilenameUtils.concat(ruleFileRoot, RULE_FILE_BASENAME+providerId+"_v"+version+".drl");
-				try {
-					FileUtils.writeStringToFile(new File(rulefile), drl);
-					logger.info("New rule file {}",rulefile);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					logger.error("Fail to create new rule file",e);
-				}
+
+		}
+		if (drl!=null && !drl.trim().equals("")){
+			String rulefile = FilenameUtils.concat(ruleFileRoot, RULE_FILE_BASENAME+providerId+"_v"+version+".drl");
+			try {
+				FileUtils.writeStringToFile(new File(rulefile), drl);
+				logger.info("New rule file {}",rulefile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				logger.error("Fail to create new rule file",e);
 			}
 		}
 				
