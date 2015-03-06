@@ -17,7 +17,7 @@ tier3Flow: Boolean
 
 package default
 
-import com.upupconsultant.pricing.data.pricingEntity
+import com.upupconsultant.pricing.model.pricingEntity
 import com.upupconsultant.pricing.model.ProviderGroup
 
 

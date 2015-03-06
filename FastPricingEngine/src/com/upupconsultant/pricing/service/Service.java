@@ -1,6 +1,6 @@
 package com.upupconsultant.pricing.service;
 
-import com.upupconsultant.common.data.PricingEntity;
+import com.upupconsultant.pricing.model.PricingEntity;
 
 public interface Service {
 	public void log(String msg);
