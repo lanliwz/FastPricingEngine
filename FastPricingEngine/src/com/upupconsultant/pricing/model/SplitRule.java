@@ -2,7 +2,7 @@ package com.upupconsultant.pricing.model;
 
 import java.util.List;
 
-public class SplitRule {
+public class SplitRule implements SplitRuleMeta{
 	private long providerId;
 	private long id;
 	private String activationGroup;

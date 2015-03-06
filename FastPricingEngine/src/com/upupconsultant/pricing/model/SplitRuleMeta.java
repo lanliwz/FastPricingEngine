@@ -1,6 +1,6 @@
 package com.upupconsultant.pricing.model;
 
-public interface SpitRuleMeta {
+public interface SplitRuleMeta {
 	public static String PROVIDER_ID="providerId";
 	
 	

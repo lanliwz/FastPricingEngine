@@ -1,6 +1,6 @@
 package com.upupconsultant.pricing.model;
 
-public class StringRuleItem extends SplitRuleItem implements SpitRuleMeta{
+public class StringRuleItem extends SplitRuleItem implements SplitRuleMeta{
 	private String operand;
 	public StringRuleItem(String name,String operator,String value){
 		super(name,operator,value);
