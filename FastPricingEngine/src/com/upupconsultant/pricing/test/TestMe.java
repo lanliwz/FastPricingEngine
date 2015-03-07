@@ -22,7 +22,8 @@ public class TestMe {
 	
 	public void init(){
 		rmgr.setRuleTemplateRoot("/Users/lanliwz/git/FastPEngine/FastPricingEngine/rulefiles");
-		rmgr.setRuleTemplateName("TemplateTest.drt");
+//		rmgr.setRuleTemplateName("TemplateTest.drt");
+		rmgr.setRuleTemplateName("RuleTemplate.drt");
 		rmgr.setDao(new Dao());
 		rmgr.setRuleFileRoot("/Users/lanliwz/FastPricingEngine/rule");
 		rmgr.setRuleFileBackupRoot("/Users/lanliwz/FastPricingEngine/ruleBackup");
@@ -62,7 +63,7 @@ public class TestMe {
 		
 		rules.add(rule1);
 
-		rmgr.getDrl(rules, rmgr.getRuleTemplateName());
+		System.out.print(rmgr.getDrl(rules, rmgr.getRuleTemplateName()));
 		
 		
 		

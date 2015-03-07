@@ -12,7 +12,7 @@ public class SplitRuleDataMapper implements SplitRuleMeta{
 			Map<String,Object> params = new HashMap<String,Object>();
 			//params.put(PROVIDER_ID, String.valueOf(rule.getProviderId()));
 			params.put(RULE_NAME, rule.getRuleName());
-			/*
+			
 			params.put(SALIENCE, String.valueOf(rule.getSalience()));
 			params.put(ACTIVATION_GROUP , rule.getActivationGroup());
 			params.put(AGENDA_GROUP,rule.getAgendaGroup());
@@ -22,9 +22,9 @@ public class SplitRuleDataMapper implements SplitRuleMeta{
 			params.put(PRICING_TYPE, rule.getAction().getType());
 			params.put(PRICING_VALUE, rule.getAction().getValue());
 			for (SplitRuleItem item:rule.getRuleItems()){
-				params.put(item.getName(), item);//item.getExpression("providerId"));
+				params.put(item.getName(), item.getValue());//item.getExpression("providerId"));
 			}
-			*/
+			
 			
 			paramSet.add(params);
 			
