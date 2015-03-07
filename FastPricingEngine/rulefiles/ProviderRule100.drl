@@ -1,0 +1,22 @@
+package com.upupconsultant.pricing.rule.provider100
+import com.upupconsultant.pricing.model.PricingEntity
+import com.upupconsultant.pricing.model.BasicSplitInstruction
+global com.upupconsultant.pricing.service.PricingService services
+dialect "mvel"
+declare PricingEntity
+	@role ( event )
+	@expires( 2s )
+end
+
+rule "test 1"
+	salience 100
+	activation-group "pricing"
+	agenda-group "tier1pricing"
+when
+	$t: PricingEntity(
+	providerId=="100"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("a",100.0)
+	service.tier1process($t,inst,kcontext.getRule().getName())
+end

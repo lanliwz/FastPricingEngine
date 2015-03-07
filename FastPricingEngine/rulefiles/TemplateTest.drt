@@ -1,0 +1,25 @@
+template header
+
+ruleName
+
+package default
+
+dialect "mvel"
+
+
+
+template "tier 1"
+rule "100"
+
+	salience 100
+	activation-group "ok"
+	agenda-group "ok"
+when
+	$t : java.util.Date()
+then
+	System.out.println("tier2pricing")
+	
+end
+
+end template
+

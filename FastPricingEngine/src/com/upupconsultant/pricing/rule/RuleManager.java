@@ -148,6 +148,8 @@ public class RuleManager {
 				logger.error("Fail to build knowledge base {}",builder.getErrors());
 			}
 			this.knowledgebase=kbase;
+			
+			logger.info("Total {} packages in knowledge base",kbase.getKnowledgePackages().size());
 			return kbase;
 			
 		}

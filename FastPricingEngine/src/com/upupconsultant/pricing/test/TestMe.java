@@ -22,7 +22,7 @@ public class TestMe {
 	
 	public void init(){
 		rmgr.setRuleTemplateRoot("/Users/lanliwz/git/FastPEngine/FastPricingEngine/rulefiles");
-		rmgr.setRuleTemplateName("RuleTemplate.drt");
+		rmgr.setRuleTemplateName("TemplateTest.drt");
 		rmgr.setDao(new Dao());
 		rmgr.setRuleFileRoot("/Users/lanliwz/FastPricingEngine/rule");
 		rmgr.setRuleFileBackupRoot("/Users/lanliwz/FastPricingEngine/ruleBackup");
@@ -39,7 +39,9 @@ public class TestMe {
 		KnowledgeBaseConfiguration  conf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
 		conf.setOption(EventProcessingOption.STREAM);
 		conf.setOption(MBeansOption.ENABLED);
-		//rmgr.buildKnowledgeBase(conf);
+//		rmgr.loadKnowledgeBase();
+//		rmgr.buildKnowledgeBase(conf);
+	//	//rmgr.buildKnowledgeBase(conf);
 		//rmgr.saveDrl(100, "test");
 		
 		SplitRule rule1 = new SplitRule(100l);
