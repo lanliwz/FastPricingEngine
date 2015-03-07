@@ -245,6 +245,13 @@ public class RuleManager {
 		this.providerGroups=pgrps;
 		
 	}
+	
+	public List<ProviderGroup> getProviderGroups() {
+		return providerGroups;
+	}
+	public void setProviderGroups(List<ProviderGroup> providerGroups) {
+		this.providerGroups = providerGroups;
+	}
 	public List<GroupMember> getGroupValues(){
 		return null;
 	}

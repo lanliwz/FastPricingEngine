@@ -16,6 +16,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 
 import com.upupconsultant.pricing.model.GroupMember;
 import com.upupconsultant.pricing.model.PricingEntity;
+import com.upupconsultant.pricing.model.ProviderGroup;
 import com.upupconsultant.pricing.rule.RuleManager;
 import com.upupconsultant.pricing.service.PricingService;
 import com.upupconsultant.pricing.event.PricingEvent;
@@ -39,27 +40,27 @@ public class CEProcessor{
 			logger.error("APPERROR - invalid pricing entity {}",event.getObject().getClass().getName());
 			return;
 		}
-		logger.debug("preprocessClaim start at {}",new Date());
+		logger.debug("preprocess claim start at {}",new Date());
 		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("preprocessClaim").setFocus();
+		this.session.getAgenda().getAgendaGroup("prepricing").setFocus();
 		this.session.fireAllRules();
-		logger.debug("preprocessClaim end at {}",new Date());
+		logger.debug("preprocess claim end at {}",new Date());
 		
-		logger.debug("tier1processClaim start at {}",new Date());
+		logger.debug("tier1pricing start at {}",new Date());
 		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("tier1processClaim").setFocus();
+		this.session.getAgenda().getAgendaGroup("tier1pricing").setFocus();
 		this.session.fireAllRules();
-		logger.debug("tier1processClaim end at {}",new Date());
+		logger.debug("tier1pricing end at {}",new Date());
 		
 		logger.debug("tier2processClaim start at {}",new Date());
 		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("tier2processClaim").setFocus();
+		this.session.getAgenda().getAgendaGroup("tier2pricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("tier2processClaim end at {}",new Date());
 
 		logger.debug("postprocessClaim start at {}",new Date());
 		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("postprocessClaim").setFocus();
+		this.session.getAgenda().getAgendaGroup("postpricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("postprocessClaim end at {}",new Date());
 		} catch (ConsequenceException e){
@@ -88,9 +89,9 @@ public class CEProcessor{
 		try {
 			this.session = createSession();
 			ruleManager.loadPricingGroup();
-			List<GroupMember> attributeGroup1 = ruleManager.getGroupValues();
-			if (attributeGroup1 != null)
-			for(GroupMember gv:attributeGroup1){
+			List<ProviderGroup> providerGroups = ruleManager.getProviderGroups();
+			if ( providerGroups != null)
+			for(ProviderGroup gv:providerGroups){
 				this.session.insert(gv);
 			}
 			this.claimstream = this.session.getWorkingMemoryEntryPoint("claim stream");
@@ -112,7 +113,7 @@ public class CEProcessor{
 		
 	}
 	public KnowledgeBase loadRuleBase(){
-		return null;//ruleManager.loadKnowledgeBase();
+		return ruleManager.loadKnowledgeBase();
 	}
 	public KnowledgeBase buildRuleBase(){
 		KnowledgeBaseConfiguration  conf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();

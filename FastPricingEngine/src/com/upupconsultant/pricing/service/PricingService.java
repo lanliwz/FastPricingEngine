@@ -64,6 +64,7 @@ public class PricingService implements Service {
 	@Override
 	public void tier1process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
+		log.info("rule name is {}",pricingRule);
 		// TODO Auto-generated method stub
 		
 	}
