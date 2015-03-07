@@ -34,6 +34,7 @@
 			<artifactId>drools-compiler</artifactId>
 			<version>5.1.1</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-decisiontables</artifactId>
@@ -44,11 +45,13 @@
 			<artifactId>drools-spring</artifactId>
 			<version>5.1.1</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>org.drools</groupId>
 			<artifactId>drools-jsr94</artifactId>
 			<version>5.1.1</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>

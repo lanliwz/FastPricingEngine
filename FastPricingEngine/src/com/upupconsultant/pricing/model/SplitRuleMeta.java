@@ -3,7 +3,8 @@ package com.upupconsultant.pricing.model;
 public interface SplitRuleMeta {
 	public static String PROVIDER_ID="providerId";
 	
-	
+	public static String PRICING_TYPE="pricingType";
+	public static String PRICING_VALUE="pricingValue";
 	
 	public static String TIER1FLOW = "tier1Flow";
 	public static String TIER2FLOW="tier2Flow";
@@ -15,4 +16,5 @@ public interface SplitRuleMeta {
 	public static String SALIENCE="salienceValue";
 	public static String NO_LOOP="noloop";
 
+	
 }

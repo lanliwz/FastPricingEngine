@@ -2,6 +2,7 @@ package com.upupconsultant.pricing.service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import com.upupconsultant.pricing.model.BasicSplitInstruction;
 import com.upupconsultant.pricing.model.PricingEntity;
 
 public class PricingService implements Service {
@@ -21,14 +22,14 @@ public class PricingService implements Service {
 	}
 
 	@Override
-	public void process(PricingEntity entity, PricingAction action,
+	public void process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void postProcess(PricingEntity entity, PricingAction action,
+	public void postProcess(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
 		// TODO Auto-generated method stub
 		
@@ -47,14 +48,21 @@ public class PricingService implements Service {
 	}
 
 	@Override
-	public void tier2process(PricingEntity entity, PricingAction action,
+	public void tier2process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void tier3process(PricingEntity entity, PricingAction action,
+	public void tier3process(PricingEntity entity, BasicSplitInstruction action,
+			String pricingRule) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tier1process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
 		// TODO Auto-generated method stub
 		

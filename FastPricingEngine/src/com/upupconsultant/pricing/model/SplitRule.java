@@ -1,19 +1,29 @@
 package com.upupconsultant.pricing.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class SplitRule implements SplitRuleMeta{
+public class SplitRule implements SplitRuleMeta, Serializable{
 	private long providerId;
 	private long id;
 	private String activationGroup;
 	private String agendaGroup;
-	private int salience;
+	private int salience=0;
 	private String ruleName;
-	private Boolean tier1Flow;
-	private Boolean tier2Flow;
-	private Boolean tier3Flow;
+	private Boolean tier1Flow=true;
+	private Boolean tier2Flow=false;
+	private Boolean tier3Flow=false;
 	private List<SplitRuleItem> ruleItems;
+	private BasicSplitInstruction action;
 	
+	public BasicSplitInstruction getAction() {
+		return action;
+	}
+
+	public void setAction(BasicSplitInstruction action) {
+		this.action = action;
+	}
+
 	public List<SplitRuleItem> getRuleItems() {
 		return ruleItems;
 	}

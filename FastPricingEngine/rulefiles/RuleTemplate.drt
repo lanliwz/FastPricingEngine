@@ -1,7 +1,7 @@
 template header
 
 providerId
-providerGroup
+
 
 ruleName
 salienceValue
@@ -17,8 +17,8 @@ tier3Flow: Boolean
 
 package default
 
-import com.upupconsultant.pricing.model.pricingEntity
-import com.upupconsultant.pricing.model.ProviderGroup
+import com.upupconsultant.pricing.model.PricingEntity
+import com.upupconsultant.pricing.model.BasicSplitInstruction
 
 
 global com.upupconsultant.pricing.service.PricingService services
@@ -40,65 +40,16 @@ rule "@{ruleName}"
 	salience @{salienceValue}
 	activation-group "@{activationGroup}"
 	agenda-group "@{agendaGroup}"
-
+when
 	$t : PricingEntity (
-	$pg:ProviderGroup(groupName=="@{providerGroup}",$providerId:providerIds)
-	providerId==@{providerId}
-	,@{providerId}
+	providerId=="@{providerId}"
 	) from entry-point "claim stream"
 then
-	BasicSplitInstruction sint = new BasicSplitInstruction(${pricingType},${pricingValue})
-	services.process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus("tier1pricing")
-	
-end
-
-end template
-
-template "tier 2 template"
-tier1Flow==true
-tier2Flow==false
-tier3Flow==false
-rule "@{ruleName}"
-
-	salience @{salienceValue}
-	activation-group "@{activationGroup}"
-	agenda-group "@{agendaGroup}"
-
-	$t : PricingEntity (
-	$pg:ProviderGroup(groupName=="@{providerGroup}",$providerId:providerIds)
-	providerId==@{providerId}
-	,@{providerId}
-	) from entry-point "claim stream"
-then
-	BasicSplitInstruction sint = new BasicSplitInstruction(${pricingType},${pricingValue})
-	services.process($t,sinst,kcontext.getRule().getName())
+	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
+	services.tier1process($t,sinst,kcontext.getRule().getName())
 	drools.setFocus("tier2pricing")
 	
 end
 
 end template
 
-template "tier 3 template"
-tier1Flow==true
-tier2Flow==false
-tier3Flow==false
-rule "@{ruleName}"
-
-	salience @{salienceValue}
-	activation-group "@{activationGroup}"
-	agenda-group "@{agendaGroup}"
-
-	$t : PricingEntity (
-	$pg:ProviderGroup(groupName=="@{providerGroup}",$providerId:providerIds)
-	providerId==@{providerId}
-	,@{providerId}
-	) from entry-point "claim stream"
-then
-	BasicSplitInstruction sint = new BasicSplitInstruction(${pricingType},${pricingValue})
-	services.process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus("tier3pricing")
-	
-end
-
-end template

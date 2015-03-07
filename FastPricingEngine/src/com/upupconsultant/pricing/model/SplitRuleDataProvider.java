@@ -21,7 +21,7 @@ public class SplitRuleDataProvider implements DataProvider{
 	@Override
 	public String[] next() {
 		SplitRule rule = iterator.next();
-		List<SplitRuleItem>items = rule.getRuleItems();
+		//List<SplitRuleItem> items = rule.getRuleItems();
 		List<String> variables = new ArrayList<String>();
 		variables.add(rule.getRuleName());
 		variables.add(String.valueOf(rule.getSalience()));

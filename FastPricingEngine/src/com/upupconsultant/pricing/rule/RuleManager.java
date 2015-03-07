@@ -66,7 +66,7 @@ public class RuleManager {
 		
 		
 	}
-	private String getDrl(List<SplitRule> rules,String template){
+	public String getDrl(List<SplitRule> rules,String template){
 		String packageName=RULE_PACKAGE_BASENAME+".provider"+rules.get(0).getProviderId();
 		ObjectDataCompiler converter = new ObjectDataCompiler();
 		SplitRuleDataMapper paramSet = new SplitRuleDataMapper(rules);
