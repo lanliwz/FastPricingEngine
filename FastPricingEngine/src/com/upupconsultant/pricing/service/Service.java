@@ -4,6 +4,8 @@ import com.upupconsultant.pricing.model.BasicSplitInstruction;
 import com.upupconsultant.pricing.model.PricingEntity;
 
 public interface Service {
+	
+	
 	public void log(String msg);
 	public void error(PricingEntity entity,String pricingRule);
 	public void process(PricingEntity entity, BasicSplitInstruction action,String pricingRule);

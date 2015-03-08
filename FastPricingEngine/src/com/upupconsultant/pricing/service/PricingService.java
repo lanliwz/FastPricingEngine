@@ -2,11 +2,14 @@ package com.upupconsultant.pricing.service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.BasicSplitInstruction;
 import com.upupconsultant.pricing.model.PricingEntity;
 
 public class PricingService implements Service {
-	Logger log = LoggerFactory.getLogger(this.getClass());
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	private Dao dao;
+	
 
 	@Override
 	public void log(String msg) {

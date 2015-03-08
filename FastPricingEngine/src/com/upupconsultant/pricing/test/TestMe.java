@@ -9,7 +9,7 @@ import org.drools.conf.EventProcessingOption;
 import org.drools.conf.MBeansOption;
 
 import com.upupconsultant.pricing.rule.RuleManager;
-import com.upupconsultant.pricing.io.Dao;
+import com.upupconsultant.pricing.io.FileDao;
 import com.upupconsultant.pricing.model.*;
 
 
@@ -24,7 +24,7 @@ public class TestMe {
 		rmgr.setRuleTemplateRoot("/Users/lanliwz/git/FastPEngine/FastPricingEngine/rulefiles");
 //		rmgr.setRuleTemplateName("TemplateTest.drt");
 		rmgr.setRuleTemplateName("RuleTemplate.drt");
-		rmgr.setDao(new Dao());
+		rmgr.setDao(new FileDao());
 		rmgr.setRuleFileRoot("/Users/lanliwz/FastPricingEngine/rule");
 		rmgr.setRuleFileBackupRoot("/Users/lanliwz/FastPricingEngine/ruleBackup");
 	}
