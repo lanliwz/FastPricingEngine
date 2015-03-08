@@ -2,8 +2,8 @@ package com.upupconsultant.pricing.test;
 
 import org.junit.Test;
 
-import com.upupconsultant.common.data.Dao;
 import com.upupconsultant.pricing.event.PricingEvent;
+import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.PricingEntity;
 import com.upupconsultant.pricing.process.CEProcessor;
 import com.upupconsultant.pricing.rule.RuleManager;
@@ -27,6 +27,7 @@ public class TestClaims {
 		PricingEntity claim = new PricingEntity("100");
 		PricingEvent claimevt= new PricingEvent(claim);
 		cep.receive(claimevt);
+		
 		
 		
 		

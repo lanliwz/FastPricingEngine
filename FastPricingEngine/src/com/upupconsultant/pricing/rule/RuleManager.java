@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
-import com.upupconsultant.common.data.Dao;
+import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.*;
 
 import org.apache.commons.io.FileUtils;

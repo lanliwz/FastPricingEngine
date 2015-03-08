@@ -18,5 +18,5 @@ when
 	) from entry-point "claim stream"
 then
 	BasicSplitInstruction inst = new BasicSplitInstruction("a",100.0)
-	service.tier1process($t,inst,kcontext.getRule().getName())
+	services.tier1process($t,inst,kcontext.getRule().getName())
 end

@@ -52,17 +52,24 @@ public class CEProcessor{
 		this.session.fireAllRules();
 		logger.debug("tier1pricing end at {}",new Date());
 		
-		logger.debug("tier2processClaim start at {}",new Date());
+		logger.debug("tier2pricing start at {}",new Date());
 		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("tier2pricing").setFocus();
 		this.session.fireAllRules();
-		logger.debug("tier2processClaim end at {}",new Date());
+		logger.debug("tier2pricing end at {}",new Date());
+		
+		logger.debug("tier3pricing start at {}",new Date());
+		this.claimstream.insert(event.getObject());
+		this.session.getAgenda().getAgendaGroup("tier3pricing").setFocus();
+		this.session.fireAllRules();
+		logger.debug("tier3pricing end at {}",new Date());
+		
 
-		logger.debug("postprocessClaim start at {}",new Date());
+		logger.debug("post pricing start at {}",new Date());
 		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("postpricing").setFocus();
 		this.session.fireAllRules();
-		logger.debug("postprocessClaim end at {}",new Date());
+		logger.debug("post pricing end at {}",new Date());
 		} catch (ConsequenceException e){
 			logger.error("APPERROR - CLAIM {}",e.getRule());
 			logger.error("APPERROR - CLAIM",e.getCause());

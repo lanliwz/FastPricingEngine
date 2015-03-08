@@ -8,8 +8,8 @@ import org.drools.KnowledgeBaseFactory;
 import org.drools.conf.EventProcessingOption;
 import org.drools.conf.MBeansOption;
 
-import com.upupconsultant.common.data.Dao;
 import com.upupconsultant.pricing.rule.RuleManager;
+import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.*;
 
 

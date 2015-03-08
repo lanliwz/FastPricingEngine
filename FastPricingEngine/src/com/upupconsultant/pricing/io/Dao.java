@@ -1,14 +1,21 @@
-package com.upupconsultant.common.data;
+package com.upupconsultant.pricing.io;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.upupconsultant.pricing.model.GroupMember;
+import com.upupconsultant.pricing.model.PricingEntity;
 import com.upupconsultant.pricing.model.PricingRule;
 import com.upupconsultant.pricing.model.PricingRuleCondition;
 import com.upupconsultant.pricing.model.ProviderGroup;
 
 public class Dao {
+	public PricingEntity nextPricingEntity(){
+		return null;
+	}
+	public void savePricingEntity(PricingEntity pricingEntity){
+		
+	}
 	public List<PricingRule> findPricingRule(long providerId){
 		List<PricingRule> prules=new ArrayList<PricingRule>();
 		return prules;
