@@ -7,12 +7,30 @@ public class PricingEntity implements Serializable{
 	private int errorCode;
 	private String error;
 	private String pricingRule;
+	private double billingAmount;
+	private double paymentAmount;
 	
 	
 	public PricingEntity(){
 		
 	}
 	
+	public double getBillingAmount() {
+		return billingAmount;
+	}
+
+	public void setBillingAmount(double billingAmount) {
+		this.billingAmount = billingAmount;
+	}
+
+	public double getPaymentAmount() {
+		return paymentAmount;
+	}
+
+	public void setPaymentAmount(double paymentAmount) {
+		this.paymentAmount = paymentAmount;
+	}
+
 	public int getErrorCode() {
 		return errorCode;
 	}
@@ -46,6 +64,14 @@ public class PricingEntity implements Serializable{
 
 	public void setProviderId(String providerId) {
 		this.providerId = providerId;
+	}
+
+	@Override
+	public String toString() {
+		return "PricingEntity [providerId=" + providerId + ", errorCode="
+				+ errorCode + ", error=" + error + ", pricingRule="
+				+ pricingRule + ", billingAmount=" + billingAmount
+				+ ", paymentAmount=" + paymentAmount + "]";
 	}
 	
 
