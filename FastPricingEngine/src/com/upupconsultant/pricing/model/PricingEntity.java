@@ -4,17 +4,27 @@ import java.io.Serializable;
 
 public class PricingEntity implements Serializable{
 	private String providerId;
-	private int errorCode;
-	private String error;
-	private String pricingRule;
 	private double billingAmount;
 	private double paymentAmount;
+	private String pricingRule;
+	private String PricingTier;
+	private int errorCode=0;
+	private String error;
+
 	
 	
 	public PricingEntity(){
 		
 	}
 	
+	public String getPricingTier() {
+		return PricingTier;
+	}
+
+	public void setPricingTier(String pricingTier) {
+		PricingTier = pricingTier;
+	}
+
 	public double getBillingAmount() {
 		return billingAmount;
 	}
@@ -68,10 +78,11 @@ public class PricingEntity implements Serializable{
 
 	@Override
 	public String toString() {
-		return "PricingEntity [providerId=" + providerId + ", errorCode="
-				+ errorCode + ", error=" + error + ", pricingRule="
-				+ pricingRule + ", billingAmount=" + billingAmount
-				+ ", paymentAmount=" + paymentAmount + "]";
+		return "PricingEntity [providerId=" + providerId + ", billingAmount="
+				+ billingAmount + ", paymentAmount=" + paymentAmount
+				+ ", pricingRule=" + pricingRule + ", PricingTier="
+				+ PricingTier + ", errorCode=" + errorCode + ", error=" + error
+				+ "]";
 	}
 	
 

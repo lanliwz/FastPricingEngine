@@ -14,6 +14,7 @@ import org.drools.conf.EventProcessingOption;
 import org.drools.conf.MBeansOption;
 import org.drools.runtime.StatefulKnowledgeSession;
 
+import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.GroupMember;
 import com.upupconsultant.pricing.model.PricingEntity;
 import com.upupconsultant.pricing.model.ProviderGroup;
@@ -26,6 +27,7 @@ public class CEProcessor{
 	private StatefulKnowledgeSession session;
 	private WorkingMemoryEntryPoint claimstream;
 	private WorkingMemoryEntryPoint actionstream;
+	private Dao dao;
 	private PricingService service = new PricingService();
 	
 	
@@ -80,6 +82,15 @@ public class CEProcessor{
 		
 		
 	}
+	
+	public Dao getDao() {
+		return dao;
+	}
+
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+
 	public StatefulKnowledgeSession getSession() {
 		return session;
 	}

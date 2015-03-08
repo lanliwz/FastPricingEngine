@@ -2,6 +2,7 @@ package com.upupconsultant.pricing.service;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import com.upupconsultant.pricing.error.PricingException;
 import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.BasicSplitInstruction;
 import com.upupconsultant.pricing.model.PricingEntity;
@@ -11,64 +12,112 @@ public class PricingService implements Service {
 	private Dao dao;
 	
 
+	public Dao getDao() {
+		return dao;
+	}
+
+	public void setDao(Dao dao) {
+		this.dao = dao;
+	}
+
+
+
 	@Override
-	public void log(String msg) {
-		log.info("APPINFO {}",msg);
+	public void error(PricingEntity entity, String pricingTier,String error) {
+		try {
+			dao.savePricingEntity(entity);
+		} catch (PricingException e) {
+			log.error("APPERROR",e);
+		} catch (Exception e){
+			log.error("APPERROR",e);
+		}
+		log.error("APPERROR {} {}",pricingTier,error);
+		
+	}
+
+
+	@Override
+	public void postProcess(PricingEntity entity) {
+		
+		entity.setPricingTier("postProcess");
+		log.debug("{}",entity.toString());
 		
 	}
 
 	@Override
-	public void error(PricingEntity entity, String pricingRule) {
-		String error ="";
-		log.error("APPERROR {}",error);
+	public void preProcess(PricingEntity entity) {
+		
+		entity.setPricingTier("preProcess");
+		log.debug("{}",entity.toString());
 		
 	}
 
 	@Override
-	public void process(PricingEntity entity, BasicSplitInstruction action,
-			String pricingRule) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void passThrough(PricingEntity entity) {
+		if(entity.getErrorCode()==0 && entity.getPricingRule()==null){
+			entity.setPricingTier("passThrough");
+			entity.setErrorCode(ServiceMeta.NO_RULE.getErrorCode());
+			entity.setError(ServiceMeta.NO_RULE.name());
+			try {
+				dao.savePricingEntity(entity);
+			} catch (PricingException e) {
+				log.error("APPERROR",e);
+			} catch (Exception e){
+				log.error("APPERROR",e);
+			}
+		}
 
-	@Override
-	public void postProcess(PricingEntity entity, BasicSplitInstruction action,
-			String pricingRule) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void preProcess(PricingEntity entity, String pricingRule) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void passThrough(PricingEntity entity, String pricingRule) {
-		// TODO Auto-generated method stub
+		log.debug("passThrough {}",entity.toString());
 		
 	}
 
 	@Override
 	public void tier2process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
-		// TODO Auto-generated method stub
+		entity.setPricingTier("tier2pricing");
+		entity.setPricingRule(pricingRule);
+		try {
+			dao.savePricingEntity(entity);
+		} catch (PricingException e) {
+			log.error("APPERROR",e);
+		} catch (Exception e){
+			log.error("APPERROR",e);
+		}
+		log.debug("{}",entity.toString());
 		
 	}
 
 	@Override
 	public void tier3process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
-		// TODO Auto-generated method stub
+		entity.setPricingTier("tier3pricing");
+		entity.setPricingRule(pricingRule);
+		try {
+			dao.savePricingEntity(entity);
+		} catch (PricingException e) {
+			log.error("APPERROR",e);
+		} catch (Exception e){
+			log.error("APPERROR",e);
+		}
+
+		log.debug("{}",entity.toString());
 		
 	}
 
 	@Override
 	public void tier1process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
-		log.info("rule name is {}",pricingRule);
-		// TODO Auto-generated method stub
+		
+		entity.setPricingTier("tier1pricing");
+		entity.setPricingRule(pricingRule);
+		try {
+			dao.savePricingEntity(entity);
+		} catch (PricingException e) {
+			log.error("APPERROR",e);
+		} catch (Exception e){
+			log.error("APPERROR",e);
+		}
+		log.debug("{}",entity.toString());
 		
 	}
 	
