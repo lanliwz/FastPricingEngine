@@ -11,6 +11,9 @@ public class PricingService implements Service {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	private Dao dao;
 	
+	public PricingService(Dao dao){
+		this.dao=dao;
+	}
 
 	public Dao getDao() {
 		return dao;
@@ -74,6 +77,8 @@ public class PricingService implements Service {
 	@Override
 	public void tier2process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
+		if(action.getType().equals("PERCENT"))
+			entity.setPaymentAmount(entity.getPaymentAmount()*action.getValue()/100);
 		entity.setPricingTier("tier2pricing");
 		entity.setPricingRule(pricingRule);
 		try {
@@ -90,6 +95,8 @@ public class PricingService implements Service {
 	@Override
 	public void tier3process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
+		if(action.getType().equals("MINIMUM") && action.getValue()>entity.getPaymentAmount())
+			entity.setPaymentAmount(action.getValue());
 		entity.setPricingTier("tier3pricing");
 		entity.setPricingRule(pricingRule);
 		try {
@@ -107,7 +114,8 @@ public class PricingService implements Service {
 	@Override
 	public void tier1process(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
-		
+		if(action.getType().equals("ITEM"))
+			entity.setPaymentAmount(action.getValue());
 		entity.setPricingTier("tier1pricing");
 		entity.setPricingRule(pricingRule);
 		try {

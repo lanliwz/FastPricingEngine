@@ -8,15 +8,45 @@ declare PricingEntity
 	@expires( 2s )
 end
 
-rule "test 1"
+rule "provider ABC item rule 1"
 	salience 100
-	activation-group "pricing"
+	activation-group "tier1pricing"
 	agenda-group "tier1pricing"
 when
 	$t: PricingEntity(
 	providerId=="100"
 	) from entry-point "claim stream"
 then
-	BasicSplitInstruction inst = new BasicSplitInstruction("a",100.0)
+	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",500.0)
 	services.tier1process($t,inst,kcontext.getRule().getName())
+	drools.setFocus("tier2pricing")
+
+end
+
+rule "provider ABC percentage rule 2"
+	salience 100
+	activation-group "tier2pricing"
+	agenda-group "tier2pricing"
+when
+	$t: PricingEntity(
+	providerId=="100"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",80.0)
+	services.tier2process($t,inst,kcontext.getRule().getName())
+	drools.setFocus("tier3pricing")
+end
+
+rule "provider ABC minimum rule 3"
+	salience 100
+	activation-group "tier3pricing"
+	agenda-group "tier3pricing"
+when
+	$t: PricingEntity(
+	providerId=="100"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("MINIMUM",450.0)
+	services.tier3process($t,inst,kcontext.getRule().getName())
+	drools.setFocus("postPricing")
 end

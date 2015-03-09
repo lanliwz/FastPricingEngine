@@ -28,7 +28,7 @@ public class CEProcessor{
 	private WorkingMemoryEntryPoint claimstream;
 	private WorkingMemoryEntryPoint actionstream;
 	private Dao dao;
-	private PricingService service = new PricingService();
+	private PricingService service;
 	
 	
 	public void receive(PricingEvent<?> event){
@@ -42,33 +42,33 @@ public class CEProcessor{
 			logger.error("APPERROR - invalid pricing entity {}",event.getObject().getClass().getName());
 			return;
 		}
-		logger.debug("preprocess claim start at {}",new Date());
+		logger.debug("pre pricing start at {}",new Date());
 		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("prepricing").setFocus();
 		this.session.fireAllRules();
-		logger.debug("preprocess claim end at {}",new Date());
+		logger.debug("pre pricing end at {}",new Date());
 		
 		logger.debug("tier1pricing start at {}",new Date());
-		this.claimstream.insert(event.getObject());
+//		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("tier1pricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("tier1pricing end at {}",new Date());
 		
 		logger.debug("tier2pricing start at {}",new Date());
-		this.claimstream.insert(event.getObject());
+//		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("tier2pricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("tier2pricing end at {}",new Date());
 		
 		logger.debug("tier3pricing start at {}",new Date());
-		this.claimstream.insert(event.getObject());
+//		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("tier3pricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("tier3pricing end at {}",new Date());
 		
 
 		logger.debug("post pricing start at {}",new Date());
-		this.claimstream.insert(event.getObject());
+//		this.claimstream.insert(event.getObject());
 		this.session.getAgenda().getAgendaGroup("postpricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("post pricing end at {}",new Date());
@@ -105,6 +105,7 @@ public class CEProcessor{
 
 	public synchronized void init(){
 		try {
+		
 			this.session = createSession();
 			ruleManager.loadPricingGroup();
 			List<ProviderGroup> providerGroups = ruleManager.getProviderGroups();
@@ -142,7 +143,6 @@ public class CEProcessor{
 	}
 	public StatefulKnowledgeSession createSession(KnowledgeBase kbase){
 		StatefulKnowledgeSession session = kbase.newStatefulKnowledgeSession();
-		service = new PricingService();
 		session.setGlobal("services", service);
 		session.fireAllRules();
 		return session;
