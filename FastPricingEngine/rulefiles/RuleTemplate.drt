@@ -11,6 +11,8 @@ agendaGroup
 pricingType
 pricingValue
 
+nextAgendaGroup
+
 tier1Flow: Boolean
 tier2Flow: Boolean
 tier3Flow: Boolean
@@ -47,7 +49,51 @@ when
 then
 	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
 	services.tier1process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus("tier2pricing")
+	drools.setFocus(@{nextAgendaGroup})
+	
+end
+
+end template
+
+template "tier 2 template"
+tier1Flow==true
+tier2Flow==false
+tier3Flow==false
+rule "@{ruleName}"
+
+	salience @{salienceValue}
+	activation-group "@{activationGroup}"
+	agenda-group "@{agendaGroup}"
+when
+	$t : PricingEntity (
+	providerId=="@{providerId}"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
+	services.tier1process($t,sinst,kcontext.getRule().getName())
+	drools.setFocus(@{nextAgendaGroup})
+	
+end
+
+end template
+
+template "tier 3 template"
+tier1Flow==true
+tier2Flow==false
+tier3Flow==false
+rule "@{ruleName}"
+
+	salience @{salienceValue}
+	activation-group "@{activationGroup}"
+	agenda-group "@{agendaGroup}"
+when
+	$t : PricingEntity (
+	providerId=="@{providerId}"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
+	services.tier1process($t,sinst,kcontext.getRule().getName())
+	drools.setFocus(@{nextAgendaGroup})
 	
 end
 

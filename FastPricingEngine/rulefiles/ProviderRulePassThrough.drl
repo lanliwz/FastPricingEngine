@@ -1,0 +1,20 @@
+package com.upupconsultant.pricing.rule.provider.PassThrough
+import com.upupconsultant.pricing.model.PricingEntity
+global com.upupconsultant.pricing.service.PricingService services
+dialect "mvel"
+declare PricingEntity
+	@role ( event )
+	@expires( 2s )
+end
+
+rule "pass through rule"
+	salience 0
+	activation-group "postPricing"
+	agenda-group "postPricing"
+when
+	$t: PricingEntity (
+	) from entry-point "claim stream"
+then
+	services.postProcess($t)
+
+end

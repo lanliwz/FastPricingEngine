@@ -44,7 +44,7 @@ public class CEProcessor{
 		}
 		logger.debug("pre pricing start at {}",new Date());
 		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("prepricing").setFocus();
+		this.session.getAgenda().getAgendaGroup("prePricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("pre pricing end at {}",new Date());
 		
@@ -69,7 +69,7 @@ public class CEProcessor{
 
 		logger.debug("post pricing start at {}",new Date());
 //		this.claimstream.insert(event.getObject());
-		this.session.getAgenda().getAgendaGroup("postpricing").setFocus();
+		this.session.getAgenda().getAgendaGroup("postPricing").setFocus();
 		this.session.fireAllRules();
 		logger.debug("post pricing end at {}",new Date());
 		} catch (ConsequenceException e){

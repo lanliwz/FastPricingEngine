@@ -42,7 +42,19 @@ public class PricingService implements Service {
 	@Override
 	public void postProcess(PricingEntity entity) {
 		
-		entity.setPricingTier("postProcess");
+		
+		if(entity.getErrorCode()==0 && entity.getPricingRule()==null){
+			entity.setPricingTier("postPricing");
+			entity.setErrorCode(ServiceMeta.NO_RULE.getErrorCode());
+			entity.setError(ServiceMeta.NO_RULE.name());
+			try {
+				dao.savePricingEntity(entity);
+			} catch (PricingException e) {
+				log.error("APPERROR",e);
+			} catch (Exception e){
+				log.error("APPERROR",e);
+			}
+		}
 		log.debug("{}",entity.toString());
 		
 	}
@@ -50,7 +62,7 @@ public class PricingService implements Service {
 	@Override
 	public void preProcess(PricingEntity entity) {
 		
-		entity.setPricingTier("preProcess");
+		entity.setPricingTier("prePricing");
 		log.debug("{}",entity.toString());
 		
 	}
