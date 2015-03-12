@@ -47,15 +47,16 @@ public class PricingService implements Service {
 			entity.setPricingTier("postPricing");
 			entity.setErrorCode(ServiceMeta.NO_RULE.getErrorCode());
 			entity.setError(ServiceMeta.NO_RULE.name());
-			try {
+		}	
+		try {
 				dao.savePricingEntity(entity);
-				log.debug("{}",entity.toString());
+				log.debug("post pricing {}",entity.toString());
 			} catch (PricingException e) {
 				log.error("APPERROR",e);
 			} catch (Exception e){
 				log.error("APPERROR",e);
 			}
-		}
+		
 		
 		
 	}
@@ -74,13 +75,13 @@ public class PricingService implements Service {
 			entity.setPricingTier("passThrough");
 			entity.setErrorCode(ServiceMeta.NO_RULE.getErrorCode());
 			entity.setError(ServiceMeta.NO_RULE.name());
-			try {
-				dao.savePricingEntity(entity);
-			} catch (PricingException e) {
-				log.error("APPERROR",e);
-			} catch (Exception e){
-				log.error("APPERROR",e);
-			}
+//			try {
+//				dao.savePricingEntity(entity);
+//			} catch (PricingException e) {
+//				log.error("APPERROR",e);
+//			} catch (Exception e){
+//				log.error("APPERROR",e);
+//			}
 		}
 
 		log.debug("passThrough {}",entity.toString());
@@ -94,13 +95,13 @@ public class PricingService implements Service {
 			entity.setPaymentAmount(entity.getPaymentAmount()*action.getValue()/100);
 		entity.setPricingTier("tier2pricing");
 		entity.setPricingRule(pricingRule);
-		try {
-			dao.savePricingEntity(entity);
-		} catch (PricingException e) {
-			log.error("APPERROR",e);
-		} catch (Exception e){
-			log.error("APPERROR",e);
-		}
+//		try {
+//			dao.savePricingEntity(entity);
+//		} catch (PricingException e) {
+//			log.error("APPERROR",e);
+//		} catch (Exception e){
+//			log.error("APPERROR",e);
+//		}
 		log.debug("{}",entity.toString());
 		
 	}
@@ -112,13 +113,13 @@ public class PricingService implements Service {
 			entity.setPaymentAmount(action.getValue());
 		entity.setPricingTier("tier3pricing");
 		entity.setPricingRule(pricingRule);
-		try {
-			dao.savePricingEntity(entity);
-		} catch (PricingException e) {
-			log.error("APPERROR",e);
-		} catch (Exception e){
-			log.error("APPERROR",e);
-		}
+//		try {
+//			dao.savePricingEntity(entity);
+//		} catch (PricingException e) {
+//			log.error("APPERROR",e);
+//		} catch (Exception e){
+//			log.error("APPERROR",e);
+//		}
 
 		log.debug("{}",entity.toString());
 		
@@ -131,13 +132,13 @@ public class PricingService implements Service {
 			entity.setPaymentAmount(action.getValue());
 		entity.setPricingTier("tier1pricing");
 		entity.setPricingRule(pricingRule);
-		try {
-			dao.savePricingEntity(entity);
-		} catch (PricingException e) {
-			log.error("APPERROR",e);
-		} catch (Exception e){
-			log.error("APPERROR",e);
-		}
+//		try {
+//			dao.savePricingEntity(entity);
+//		} catch (PricingException e) {
+//			log.error("APPERROR",e);
+//		} catch (Exception e){
+//			log.error("APPERROR",e);
+//		}
 		log.debug("{}",entity.toString());
 		
 	}

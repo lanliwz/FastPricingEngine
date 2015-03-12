@@ -57,7 +57,7 @@ public class FileDao implements Dao {
 	public void savePricingEntity(PricingEntity pricingEntity) throws PricingException{
 		File file = getOutputFile();
 		try {
-			FileUtils.writeStringToFile(file, pricingEntity.toString(),true);
+			FileUtils.writeStringToFile(file, pricingEntity.toString()+"\n",true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("Fail to write {} outputfile", pricingEntity.toString());
