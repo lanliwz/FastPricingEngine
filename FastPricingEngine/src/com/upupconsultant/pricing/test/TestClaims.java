@@ -38,7 +38,9 @@ public class TestClaims {
 		System.out.println(hmocalc.getTotalAmout(1000));
 		
 		CEProcessor cep = new CEProcessor(rmgr);
-		Dao dao = new FileDao();
+		FileDao dao = new FileDao();
+		dao.setOutputFolder("/Users/lanliwz/FastPricingEngine/output");
+		dao.setOutputFileNameBase("pricedClaims.txt");
 		cep.setDao(dao);
 		PricingService service = new PricingService(dao);
 		cep.setService(service);
