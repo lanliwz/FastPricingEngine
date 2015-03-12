@@ -49,13 +49,14 @@ public class PricingService implements Service {
 			entity.setError(ServiceMeta.NO_RULE.name());
 			try {
 				dao.savePricingEntity(entity);
+				log.debug("{}",entity.toString());
 			} catch (PricingException e) {
 				log.error("APPERROR",e);
 			} catch (Exception e){
 				log.error("APPERROR",e);
 			}
 		}
-		log.debug("{}",entity.toString());
+		
 		
 	}
 

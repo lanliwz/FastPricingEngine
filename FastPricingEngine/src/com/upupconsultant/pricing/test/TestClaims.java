@@ -47,10 +47,10 @@ public class TestClaims {
 		claim.setBillingAmount(1000);
 		PricingEvent claimevt= new PricingEvent(claim);
 		cep.receive(claimevt);
-		PricingEntity claim1 = new PricingEntity("200");
-		claim.setBillingAmount(1000);
-		PricingEvent claimevt1= new PricingEvent(claim1);
-		cep.receive(claimevt1);
+//		PricingEntity claim1 = new PricingEntity("200");
+//		claim.setBillingAmount(1000);
+//		PricingEvent claimevt1= new PricingEvent(claim1);
+//		cep.receive(claimevt1);
 		
 		
 		
