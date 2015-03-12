@@ -45,13 +45,8 @@
 			<artifactId>drools-spring</artifactId>
 			<version>5.1.1</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.drools</groupId>
-			<artifactId>drools-jsr94</artifactId>
-			<version>5.1.1</version>
-		</dependency>
-		-->
+		<!-- <dependency> <groupId>org.drools</groupId> <artifactId>drools-jsr94</artifactId> 
+			<version>5.1.1</version> </dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -90,27 +85,32 @@
 			<version>2.6</version>
 		</dependency>
 		<dependency>
-		<groupId>xerces</groupId>
-		<artifactId>xercesImpl</artifactId>
-		<version>2.4.0</version>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.4.0</version>
 		</dependency>
 		<dependency>
-		<groupId>xml-apis</groupId>
-		<artifactId>xml-apis</artifactId>
-		<version>2.0.0</version>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>2.0.0</version>
 		</dependency>
 		<dependency>
-		<groupId>junit</groupId>
-		<artifactId>junit</artifactId>
-		<version>4.12</version>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
 		</dependency>
 		<dependency>
-	<groupId>org.eclipse.jdt.core.compiler</groupId>
-	<artifactId>ecj</artifactId>
-	<version>4.4.1</version>
-</dependency>
-		
-		
+			<groupId>org.eclipse.jdt.core.compiler</groupId>
+			<artifactId>ecj</artifactId>
+			<version>4.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.1</version>
+		</dependency>
+
+
 
 
 
