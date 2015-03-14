@@ -6,6 +6,7 @@ import com.upupconsultant.pricing.error.PricingException;
 import com.upupconsultant.pricing.io.Dao;
 import com.upupconsultant.pricing.model.BasicSplitInstruction;
 import com.upupconsultant.pricing.model.PricingEntity;
+import com.upupconsultant.pricing.model.PricingEntityLine;
 
 public class PricingService implements Service {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -147,11 +148,19 @@ public class PricingService implements Service {
 	public void costSharing(PricingEntity entity, BasicSplitInstruction action,
 			String pricingRule) {
 		if(action.getType().equals("ITEM")){
-			entity.setPaymentAmount(entity.getPaymentAmount()+action.getValue());
+			double value = action.getValue();
+			entity.getPricingLines().add(new PricingEntityLine("ITEM",value,pricingRule));
+			entity.setPaymentAmount(entity.getPaymentAmount()+value);
+			
 		}else if(action.getType().equals("PERCENT")){
-			entity.setPaymentAmount(entity.getPaymentAmount()+entity.getPaymentAmount()*action.getValue());
+			double value = entity.getPaymentAmount()*action.getValue();
+			entity.setPaymentAmount(entity.getPaymentAmount()+value);
+			entity.getPricingLines().add(new PricingEntityLine("ITEM",value,pricingRule));
 		}if(action.getType().equals("MAXIMUM") && entity.getPaymentAmount()>action.getValue()){
+			double value = action.getValue() - entity.getPaymentAmount();
 			entity.setPaymentAmount(action.getValue());
+			entity.getPricingLines().add(new PricingEntityLine("ITEM",value ,pricingRule));
+			
 		}
 		entity.setPricingRule(pricingRule);
 		entity.setPricingTier("costSharing");

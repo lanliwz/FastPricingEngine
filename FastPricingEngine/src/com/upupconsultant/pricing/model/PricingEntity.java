@@ -1,6 +1,8 @@
 package com.upupconsultant.pricing.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PricingEntity implements Serializable{
 	private String providerId;
@@ -10,9 +12,18 @@ public class PricingEntity implements Serializable{
 	private String PricingTier;
 	private int errorCode=0;
 	private String error;
+	private List<PricingEntityLine> pricingLines = new ArrayList<PricingEntityLine>();
 
 	
 	
+	public List<PricingEntityLine> getPricingLines() {
+		return pricingLines;
+	}
+
+	public void setPricingLines(List<PricingEntityLine> pricingLines) {
+		this.pricingLines = pricingLines;
+	}
+
 	public PricingEntity(){
 		
 	}

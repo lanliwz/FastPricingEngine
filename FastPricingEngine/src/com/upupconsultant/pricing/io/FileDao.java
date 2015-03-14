@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.upupconsultant.pricing.error.PricingException;
 import com.upupconsultant.pricing.model.GroupMember;
 import com.upupconsultant.pricing.model.PricingEntity;
+import com.upupconsultant.pricing.model.PricingEntityLine;
 import com.upupconsultant.pricing.model.PricingRule;
 import com.upupconsultant.pricing.model.PricingRuleCondition;
 import com.upupconsultant.pricing.model.ProviderGroup;
@@ -58,6 +59,10 @@ public class FileDao implements Dao {
 		File file = getOutputFile();
 		try {
 			FileUtils.writeStringToFile(file, pricingEntity.toString()+"\n",true);
+			for (PricingEntityLine line:pricingEntity.getPricingLines()){
+				FileUtils.writeStringToFile(file, line.toString()+"\n",true);
+				
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("Fail to write {} outputfile", pricingEntity.toString());
