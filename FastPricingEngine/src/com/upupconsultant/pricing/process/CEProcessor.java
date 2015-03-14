@@ -66,6 +66,12 @@ public class CEProcessor{
 		this.session.fireAllRules();
 		logger.debug("tier3pricing end at {}",new Date());
 		
+		logger.debug("costSharing start at {}",new Date());
+//		this.claimstream.insert(event.getObject());
+		this.session.getAgenda().getAgendaGroup("costSharing").setFocus();
+		this.session.fireAllRules();
+		logger.debug("costSharing end at {}",new Date());
+				
 
 		logger.debug("post pricing start at {}",new Date());
 //		this.claimstream.insert(event.getObject());

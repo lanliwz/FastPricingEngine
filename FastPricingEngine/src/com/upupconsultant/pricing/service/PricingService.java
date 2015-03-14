@@ -154,7 +154,7 @@ public class PricingService implements Service {
 			entity.setPaymentAmount(action.getValue());
 		}
 		entity.setPricingRule(pricingRule);
-		entity.setPricingTier("Cost Sharing");
+		entity.setPricingTier("costSharing");
 		log.debug("{}",entity.toString());
 	}
 	
