@@ -45,12 +45,15 @@ public class TestClaims {
 		PricingService service = new PricingService(dao);
 		cep.setService(service);
 		cep.init();
+		/*
 		PricingEntity claim = new PricingEntity("100");
 		claim.setBillingAmount(1000);
 		PricingEvent claimevt= new PricingEvent(claim);
 		cep.receive(claimevt);
+		*/
 		PricingEntity claim1 = new PricingEntity("200");
-		claim.setBillingAmount(1000);
+		claim1.setBillingAmount(5000);
+		claim1.setPaymentAmount(1000);
 		PricingEvent claimevt1= new PricingEvent(claim1);
 		cep.receive(claimevt1);
 		

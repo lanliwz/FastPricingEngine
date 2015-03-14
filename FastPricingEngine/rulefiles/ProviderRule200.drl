@@ -1,0 +1,67 @@
+package com.upupconsultant.pricing.rule.provider100
+import com.upupconsultant.pricing.model.PricingEntity
+import com.upupconsultant.pricing.model.BasicSplitInstruction
+global com.upupconsultant.pricing.service.PricingService services
+dialect "mvel"
+declare PricingEntity
+	@role ( event )
+	@expires( 2s )
+end
+
+rule "BASE 200(90)"
+	salience 200
+	activation-group "BASE"
+	agenda-group "tier1pricing"
+when
+	$t: PricingEntity(
+	providerId=="200"
+	) from entry-point "claim stream"
+then
+	#BASE
+	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",0.9)
+	services.costSharing($t,inst,kcontext.getRule().getName())
+end
+
+rule "COPY 15"
+	salience 199
+	activation-group "COPY 15"
+	agenda-group "tier1pricing"
+when
+	$t: PricingEntity(
+	providerId=="200"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",-0.1)
+	services.costSharing($t,inst,kcontext.getRule().getName())
+
+end
+
+rule "COPY 25"
+	salience 198
+	activation-group "COPY 25"
+	agenda-group "tier1pricing"
+when
+	$t: PricingEntity(
+	providerId=="200"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",-0.20)
+	services.costSharing($t,inst,kcontext.getRule().getName())
+
+end
+
+rule "ER 200"
+	salience 197
+	activation-group "er 200"
+	agenda-group "tier1pricing"
+when
+	$t: PricingEntity(
+	providerId=="200"
+	) from entry-point "claim stream"
+then
+	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",100.0)
+	services.costSharing($t,inst,kcontext.getRule().getName())
+
+end
+
+

@@ -142,6 +142,21 @@ public class PricingService implements Service {
 		log.debug("{}",entity.toString());
 		
 	}
+
+	@Override
+	public void costSharing(PricingEntity entity, BasicSplitInstruction action,
+			String pricingRule) {
+		if(action.getType().equals("ITEM")){
+			entity.setPaymentAmount(entity.getPaymentAmount()+action.getValue());
+		}else if(action.getType().equals("PERCENT")){
+			entity.setPaymentAmount(entity.getPaymentAmount()+entity.getPaymentAmount()*action.getValue());
+		}if(action.getType().equals("MAXIMUM") && entity.getPaymentAmount()>action.getValue()){
+			entity.setPaymentAmount(action.getValue());
+		}
+		entity.setPricingRule(pricingRule);
+		entity.setPricingTier("Cost Sharing");
+		log.debug("{}",entity.toString());
+	}
 	
 	
 

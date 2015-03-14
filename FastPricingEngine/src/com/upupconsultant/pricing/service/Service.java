@@ -14,6 +14,7 @@ public interface Service {
 	public void tier2process(PricingEntity entity, BasicSplitInstruction action,String pricingRule);
 	public void tier3process(PricingEntity entity, BasicSplitInstruction action,String pricingRule);
 	public void tier1process(PricingEntity entity, BasicSplitInstruction action,String pricingRule);
+	public void costSharing(PricingEntity entity, BasicSplitInstruction action,String pricingRule);
 	
 
 }
