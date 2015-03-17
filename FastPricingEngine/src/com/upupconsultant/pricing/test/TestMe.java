@@ -37,9 +37,9 @@ public class TestMe {
 		RuleManager rmgr = test.rmgr;
 		rmgr.loadPricingGroup();
 		rmgr.loadKnowledgeBase();
-		KnowledgeBaseConfiguration  conf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
-		conf.setOption(EventProcessingOption.STREAM);
-		conf.setOption(MBeansOption.ENABLED);
+//		KnowledgeBaseConfiguration  conf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
+	//	conf.setOption(EventProcessingOption.STREAM);
+		//conf.setOption(MBeansOption.ENABLED);
 //		rmgr.loadKnowledgeBase();
 //		rmgr.buildKnowledgeBase(conf);
 	//	//rmgr.buildKnowledgeBase(conf);
