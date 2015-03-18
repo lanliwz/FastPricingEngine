@@ -122,28 +122,13 @@ public class FileDao implements Dao {
 	
 	
 
-	@Override
-	public List<SplitRule> getCostSharingRules(String rateCode) {
-		String fname=FilenameUtils.concat(sourceFolder, rateCode+".txt");
-		File fr = new File(fname);
+	private Map<String,List> getConditions(String rateCode){
 		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_cond.txt");
-		File fcond = new File(fname);
-		String faname=FilenameUtils.concat(sourceFolder, rateCode+"_act.txt");
-		File faction = new File(fname);
+		File fcond = new File(fcname);
+
 		try {
-			List<String> rules = FileUtils.readLines(fr);
+
 			List<String> ruleconds = FileUtils.readLines(fcond);
-			List<String> ruleacts = FileUtils.readLines(faction);
-			for(String r:rules){
-				String[] rattr = r.split(",");
-				SplitRule srule = new SplitRule(Long.valueOf(rattr[0]));
-				srule.setRuleName(rattr[1]);
-				
-				
-				
-				
-				
-			}
 			Map<String,List> items = new HashMap<String,List>();
 			for(String cond:ruleconds){
 				String[] cattr = cond.split(",");//0 is rule id
@@ -162,7 +147,22 @@ public class FileDao implements Dao {
 				
 				
 			}
-			Map<String,List> actions = new HashMap<String,List>();
+			return items;
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	private Map<String,List> getActions(String rateCode){
+		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_act.txt");
+		File fcond = new File(fcname);
+
+		try {
+
+			List<String> ruleacts = FileUtils.readLines(fcond);
+			Map<String,List> items = new HashMap<String,List>();
 			for(String act:ruleacts){
 				String[] aattr = act.split(",");//0 is rule id
 				BasicSplitInstruction sitem = new BasicSplitInstruction(aattr[1], aattr[2]);
@@ -177,7 +177,42 @@ public class FileDao implements Dao {
 					items.put(aattr[0], l);
 				}
 				
+				
+				
 			}
+			return items;
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<SplitRule> getCostSharingRules(String rateCode) {
+		String fname=FilenameUtils.concat(sourceFolder, rateCode+".txt");
+		File fr = new File(fname);
+		Map<String,List> conds = getConditions(rateCode);
+		Map<String,List> actions = getActions(rateCode);
+		
+		try {
+			List<String> rules = FileUtils.readLines(fr);
+			for(String r:rules){
+				String[] rattr = r.split(",");
+				SplitRule srule = new SplitRule(Long.valueOf(rattr[0]));
+				srule.setRuleName(rattr[1]);
+				srule.setAction((BasicSplitInstruction)actions.get(rattr[0]).get(0));
+				srule.setRuleItems(conds.get(rattr[0]));
+				
+				
+				
+				
+				
+				
+			}
+				
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
