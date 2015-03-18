@@ -59,6 +59,9 @@ public class SplitRule implements SplitRuleMeta, Serializable{
 	public SplitRule(long id){
 		this.id=id;
 	}
+	public SplitRule(){
+		
+	}
 
 	public long getProviderId() {
 		return providerId;
