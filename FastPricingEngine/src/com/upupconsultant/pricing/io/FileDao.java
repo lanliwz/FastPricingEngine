@@ -17,11 +17,13 @@ import com.upupconsultant.pricing.model.PricingEntityLine;
 import com.upupconsultant.pricing.model.PricingRule;
 import com.upupconsultant.pricing.model.PricingRuleCondition;
 import com.upupconsultant.pricing.model.ProviderGroup;
+import com.upupconsultant.pricing.model.SplitRule;
 
 public class FileDao implements Dao {
 	private static Logger logger = LoggerFactory.getLogger(Dao.class);
 	private String outputFolder;
 	private String outputFileNameBase;
+	private String sourceFolder;
 	
 	public File getOutputFile(){
 		
@@ -100,6 +102,37 @@ public class FileDao implements Dao {
 	public List<String> findGroupMembers(String groupName){
 		List<String> mbrs = new ArrayList<String>();
 		return mbrs;
+	}
+
+	@Override
+	public List<SplitRule> getProviderRules(long providerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SplitRule> getProviderGroupRules(long providerGroupId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SplitRule> getCostSharingRules(String rateCode) {
+		String fname=FilenameUtils.concat(sourceFolder, rateCode+".txt");
+		File fr = new File(fname);
+		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_cond.txt");
+		File fcond = new File(fname);
+		String faname=FilenameUtils.concat(sourceFolder, rateCode+"_act.txt");
+		File faction = new File(fname);
+		try {
+			List<String> rules = FileUtils.readLines(fr);
+			List<String> ruleconds = FileUtils.readLines(fcond);
+			List<String> ruleacts = FileUtils.readLines(faction);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

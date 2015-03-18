@@ -2,10 +2,13 @@ package com.upupconsultant.pricing.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PricingEntity implements Serializable{
 	private String providerId;
+	private Date serviceDate;
+	private String rateSheetCode;
 	private double billingAmount;
 	private double paymentAmount;
 	private String pricingRule;
@@ -16,6 +19,22 @@ public class PricingEntity implements Serializable{
 
 	
 	
+	public String getRateSheetCode() {
+		return rateSheetCode;
+	}
+
+	public void setRateSheetCode(String rateSheetCode) {
+		this.rateSheetCode = rateSheetCode;
+	}
+
+	public Date getServiceDate() {
+		return serviceDate;
+	}
+
+	public void setServiceDate(Date serviceDate) {
+		this.serviceDate = serviceDate;
+	}
+
 	public List<PricingEntityLine> getPricingLines() {
 		return pricingLines;
 	}

@@ -61,6 +61,16 @@ public class RuleManager {
 			srule.setProviderId(prule.getProviderId());
 			srule.setSalience(prule.getSalience());
 			srule.setRuleName(prule.getName());
+			if(prule.getAgendaGroup().equals(SplitRuleMeta.TIER1FLOW)){
+				srule.setTier1Flow(true);
+			}else if(prule.getAgendaGroup().equals(SplitRuleMeta.TIER2FLOW)){
+				srule.setTier2Flow(true);
+			}else if(prule.getAgendaGroup().equals(SplitRuleMeta.TIER3FLOW)){
+				srule.setTier3Flow(true);
+			}
+			for(PricingRuleCondition cond:conds){
+				
+			}
 
 		}
 		return "";

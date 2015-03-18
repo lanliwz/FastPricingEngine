@@ -33,69 +33,20 @@ declare PricingEntity
 end
 
 
-template "tier 1 template"
-tier1Flow==true
-tier2Flow==false
-tier3Flow==false
+template "cost sharing template"
 rule "@{ruleName}"
 
 	salience @{salienceValue}
 	activation-group "@{activationGroup}"
-	agenda-group "@{agendaGroup}"
+	agenda-group "costSharing"
 when
 	$t : PricingEntity (
 	providerId=="@{providerId}"
 	) from entry-point "claim stream"
 then
 	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
-	services.tier1process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus(@{nextAgendaGroup})
+	services.costSharing($t,sinst,kcontext.getRule().getName())
 	
 end
 
 end template
-
-template "tier 2 template"
-tier1Flow==true
-tier2Flow==false
-tier3Flow==false
-rule "@{ruleName}"
-
-	salience @{salienceValue}
-	activation-group "@{activationGroup}"
-	agenda-group "@{agendaGroup}"
-when
-	$t : PricingEntity (
-	providerId=="@{providerId}"
-	) from entry-point "claim stream"
-then
-	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
-	services.tier1process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus(@{nextAgendaGroup})
-	
-end
-
-end template
-
-template "tier 3 template"
-tier1Flow==true
-tier2Flow==false
-tier3Flow==false
-rule "@{ruleName}"
-
-	salience @{salienceValue}
-	activation-group "@{activationGroup}"
-	agenda-group "@{agendaGroup}"
-when
-	$t : PricingEntity (
-	providerId=="@{providerId}"
-	) from entry-point "claim stream"
-then
-	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})
-	services.tier1process($t,sinst,kcontext.getRule().getName())
-	drools.setFocus(@{nextAgendaGroup})
-	
-end
-
-end template
-
