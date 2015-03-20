@@ -29,6 +29,14 @@ public class FileDao implements Dao {
 	private String outputFileNameBase;
 	private String sourceFolder;
 	
+	public String getSourceFolder() {
+		return sourceFolder;
+	}
+
+	public void setSourceFolder(String sourceFolder) {
+		this.sourceFolder = sourceFolder;
+	}
+
 	public File getOutputFile(){
 		
 		String f = FilenameUtils.concat(outputFolder, outputFileNameBase);
@@ -123,7 +131,7 @@ public class FileDao implements Dao {
 	
 
 	private Map<String,List> getConditions(String rateCode){
-		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_cond.txt");
+		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_cond.csv");
 		File fcond = new File(fcname);
 
 		try {
@@ -156,7 +164,7 @@ public class FileDao implements Dao {
 		return null;
 	}
 	private Map<String,List> getActions(String rateCode){
-		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_act.txt");
+		String fcname=FilenameUtils.concat(sourceFolder, rateCode+"_act.csv");
 		File fcond = new File(fcname);
 
 		try {
@@ -191,25 +199,25 @@ public class FileDao implements Dao {
 	
 	@Override
 	public List<SplitRule> getCostSharingRules(String rateCode) {
-		String fname=FilenameUtils.concat(sourceFolder, rateCode+".txt");
+		String fname=FilenameUtils.concat(sourceFolder, rateCode+".csv");
 		File fr = new File(fname);
 		Map<String,List> conds = getConditions(rateCode);
 		Map<String,List> actions = getActions(rateCode);
+		List<SplitRule> srules = new ArrayList<SplitRule>();
 		
 		try {
 			List<String> rules = FileUtils.readLines(fr);
+			
 			for(String r:rules){
 				String[] rattr = r.split(",");
 				SplitRule srule = new SplitRule(Long.valueOf(rattr[0]));
 				srule.setRuleName(rattr[1]);
+				srule.setActivationGroup(rattr[2]);
+				srule.setAgendaGroup(rattr[3]);
+				srule.setSalience(Integer.valueOf(rattr[4]));		
 				srule.setAction((BasicSplitInstruction)actions.get(rattr[0]).get(0));
 				srule.setRuleItems(conds.get(rattr[0]));
-				
-				
-				
-				
-				
-				
+				srules.add(srule);
 			}
 				
 
@@ -217,7 +225,7 @@ public class FileDao implements Dao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return srules;
 	}
 
 }

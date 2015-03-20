@@ -1,6 +1,7 @@
 template header
 
 providerId
+rateSheetCode
 
 
 ruleName
@@ -41,7 +42,7 @@ rule "@{ruleName}"
 	agenda-group "costSharing"
 when
 	$t : PricingEntity (
-	providerId=="@{providerId}"
+	@{rateSheetCode}
 	) from entry-point "claim stream"
 then
 	BasicSplitInstruction sinst = new BasicSplitInstruction("@{pricingType}",@{pricingValue})

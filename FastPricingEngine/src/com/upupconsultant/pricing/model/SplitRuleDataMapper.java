@@ -16,13 +16,17 @@ public class SplitRuleDataMapper implements SplitRuleMeta{
 			params.put(SALIENCE, String.valueOf(rule.getSalience()));
 			params.put(ACTIVATION_GROUP , rule.getActivationGroup());
 			params.put(AGENDA_GROUP,rule.getAgendaGroup());
-			params.put(TIER1FLOW, rule.getTier1Flow());
-			params.put(TIER2FLOW, rule.getTier2Flow());
-			params.put(TIER3FLOW, rule.getTier3Flow());
+			if (rule.getTier1Flow()!=null)
+				params.put(TIER1FLOW, rule.getTier1Flow());
+			if (rule.getTier2Flow()!=null)
+				params.put(TIER2FLOW, rule.getTier2Flow());
+			if (rule.getTier3Flow()!=null)
+				params.put(TIER3FLOW, rule.getTier3Flow());
+			
 			params.put(PRICING_TYPE, rule.getAction().getType());
 			params.put(PRICING_VALUE, rule.getAction().getValue());
 			for (SplitRuleItem item:rule.getRuleItems()){
-				params.put(item.getName(), item.getValue());//item.getExpression("providerId"));
+				params.put(item.getName(), item.getExpression(item.getName()));
 			}
 			
 			

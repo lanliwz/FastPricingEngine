@@ -23,18 +23,17 @@ public class TestMe {
 	public void init(){
 		rmgr.setRuleTemplateRoot("/Users/lanliwz/git/FastPEngine/FastPricingEngine/rulefiles");
 //		rmgr.setRuleTemplateName("TemplateTest.drt");
-		rmgr.setRuleTemplateName("RuleTemplate.drt");
-		rmgr.setDao(new FileDao());
+		rmgr.setRuleTemplateName("CostSharingTemplate.drt");
+		FileDao dao = new FileDao();
+		dao.setSourceFolder("/Users/lanliwz/git/FastPEngine/FastPricingEngine/rulefiles");
+		rmgr.setDao(dao);
 		rmgr.setRuleFileRoot("/Users/lanliwz/FastPricingEngine/rule");
 		rmgr.setRuleFileBackupRoot("/Users/lanliwz/FastPricingEngine/ruleBackup");
+		
 	}
-	
-	
-	public static void main(String[] args){
+	public void test1() {
 		List<SplitRule> rules = new ArrayList<SplitRule>();
-		TestMe test = new TestMe();
-		test.init();
-		RuleManager rmgr = test.rmgr;
+		
 		rmgr.loadPricingGroup();
 		rmgr.loadKnowledgeBase();
 //		KnowledgeBaseConfiguration  conf = KnowledgeBaseFactory.newKnowledgeBaseConfiguration();
@@ -64,6 +63,17 @@ public class TestMe {
 		rules.add(rule1);
 
 		System.out.print(rmgr.getDrl(rules, rmgr.getRuleTemplateName()));
+	}
+	public void test2(String rateCode){
+		String s = rmgr.getDrl4CostSharing(rateCode, rmgr.getRuleTemplateName());
+		System.out.print(s);
+	}
+	public static void main(String[] args){
+		
+		TestMe test = new TestMe();
+		test.init();
+		test.test2("AA2T1");
+
 		
 		
 		

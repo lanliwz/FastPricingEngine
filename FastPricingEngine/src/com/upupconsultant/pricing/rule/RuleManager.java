@@ -42,6 +42,11 @@ public class RuleManager {
 	private Dao dao;
 
 	private List<ProviderGroup> providerGroups = new ArrayList();
+	
+	public String getDrl4CostSharing(String rateCode,String templateName){
+		List<SplitRule> rules = dao.getCostSharingRules(rateCode);
+		return getDrl4CostSharing(rules,rateCode,templateName);
+	}
 
 	public String getDrl(long providerId) {
 		List<PricingRule> crules = dao.findPricingRule(providerId);
@@ -75,6 +80,28 @@ public class RuleManager {
 		}
 		return "";
 
+	}
+	
+	public String getDrl4CostSharing(List<SplitRule> rules,String rateCode,String template) {
+		String packageName = RULE_PACKAGE_BASENAME + "."+rateCode;
+			
+		ObjectDataCompiler converter = new ObjectDataCompiler();
+		SplitRuleDataMapper paramSet = new SplitRuleDataMapper(rules);
+		InputStream templateStream = null;
+		String drl = null;
+		template = FilenameUtils.concat(ruleTemplateRoot, template);
+		try {
+			templateStream = new FileInputStream(new File(template));
+			drl = converter.compile(paramSet.getParamSet(), templateStream);
+			drl = StringUtils.replace(drl, "package default", "package"
+					+ packageName);
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return drl;
 	}
 
 	public String getDrl(List<SplitRule> rules, String template) {
