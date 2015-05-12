@@ -153,7 +153,7 @@ public class PricingService implements Service {
 			entity.setPaymentAmount(entity.getPaymentAmount()+value);
 			
 		}else if(action.getType().equals("PERCENT")){
-			double value = entity.getPaymentAmount()*action.getValue();
+			double value = entity.getBillingAmount()*action.getValue();
 			entity.setPaymentAmount(entity.getPaymentAmount()+value);
 			entity.getPricingLines().add(new PricingEntityLine("ITEM",value,pricingRule));
 		}if(action.getType().equals("MAXIMUM") && entity.getPaymentAmount()>action.getValue()){

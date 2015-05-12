@@ -29,9 +29,9 @@ public class TestClaims {
 			rmgr.setRuleFileBackupRoot("/Users/lanliwz/FastPricingEngine/ruleBackup");
 			
 		Map<String,Double> hmoCalc = new HashMap<String,Double>();
-		hmoCalc.put("BASE,P", 0.9);
-		hmoCalc.put("COPAY1,P",-0.01);
-		hmoCalc.put("COPAY2,P", -0.005);
+		hmoCalc.put("CO-INSURANCE,P", 0.9);
+		hmoCalc.put("COPAY T1,C",-10.0 );
+		hmoCalc.put("COPAY T2,C", -50.0);
 		
 		BenefitCalculator hmocalc = new BenefitCalculator("HMO",hmoCalc);
 		
@@ -53,7 +53,7 @@ public class TestClaims {
 		*/
 		PricingEntity claim1 = new PricingEntity("200");
 		claim1.setBillingAmount(5000);
-		claim1.setPaymentAmount(1000);
+		claim1.setPaymentAmount(0);
 		PricingEvent claimevt1= new PricingEvent(claim1);
 		cep.receive(claimevt1);
 		

@@ -2,6 +2,14 @@ package com.upupconsultant.pricing.process;
 
 import java.util.HashMap;
 import java.util.Map;
+/**
+ * 
+ * @author lanliwz
+ * RateSheet format - [category,type],[value]
+ * category - string, name of the category
+ * type - P for percentage, 0.1 = 10%, negtive for deduction. C for constant absolute amount 
+ *
+ */
 
 public class BenefitCalculator {
 	private String groupName;

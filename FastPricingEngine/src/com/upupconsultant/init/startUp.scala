@@ -35,3 +35,4 @@ object startUp extends App {
 
 
 }
+case class TRule(id:Long,activationGroup:String,agendaGroup:String)

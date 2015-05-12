@@ -8,7 +8,7 @@ declare PricingEntity
 	@expires( 2s )
 end
 
-rule "BASE 200(90)"
+rule "Co-Insurance 200(20/80)"
 	salience 200
 	activation-group "BASE"
 	agenda-group "tier1pricing"
@@ -18,7 +18,7 @@ when
 	) from entry-point "claim stream"
 then
 	#BASE
-	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",0.9)
+	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",-0.2)
 	services.costSharing($t,inst,kcontext.getRule().getName())
 end
 
@@ -31,7 +31,7 @@ when
 	providerId=="200"
 	) from entry-point "claim stream"
 then
-	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",-0.1)
+	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",-15.0)
 	services.costSharing($t,inst,kcontext.getRule().getName())
 
 end
@@ -45,7 +45,7 @@ when
 	providerId=="200"
 	) from entry-point "claim stream"
 then
-	BasicSplitInstruction inst = new BasicSplitInstruction("PERCENT",-0.20)
+	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",-25.0)
 	services.costSharing($t,inst,kcontext.getRule().getName())
 
 end
@@ -59,7 +59,7 @@ when
 	providerId=="200"
 	) from entry-point "claim stream"
 then
-	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",100.0)
+	BasicSplitInstruction inst = new BasicSplitInstruction("ITEM",-100.0)
 	services.costSharing($t,inst,kcontext.getRule().getName())
 
 end
